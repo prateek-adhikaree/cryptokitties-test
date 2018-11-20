@@ -15,8 +15,16 @@ contract TestKittyCore is KittyCore {
         require (_ownersTokens+1 == super.balanceOf(_address), "Owner's token(s) do not match");
     }
     
-    /*// @Dev: requires sire kitty to be owned by msg.sender
-    function testMakeKittyPregnant(uint256 _sireId, uint256 _matronId) public {
+    // @Dev: requires sire kitty to be owned by msg.sender
+    function testMakeKittyPregnant() public {
+        
+        if (promoCreatedCount < pregnantKitties+2) {
+            testMakeKittyPregnant();
+            testMakeKittyPregnant();
+        }
+        
+        uint256 _sireId = pregnantKitties+1;
+        uint256 _matronId = pregnantKitties+2;
         
         require (isReadyToBreed(_sireId), "Sire is not yet ready to breed");
         require (isReadyToBreed(_matronId), "Matron is not yet ready to breed");
@@ -43,7 +51,7 @@ contract TestKittyCore is KittyCore {
         // But to do so, the geneScience is required which is not open source
     }
     
-    function testCreateGen0Kitty() public {
+    /*function testCreateGen0Kitty() public {
         // KittyMinting.createGen0Auction() but it calls saleAuction.createAuction()
         // action is the only way ownership for a minted gen0 kitty is decided
     }*/

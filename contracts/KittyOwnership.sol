@@ -92,8 +92,8 @@ contract KittyOwnership is KittyBase, ERC721 {
         address _to,
         uint256 _tokenId
     )
-        external
-        whenNotPaused
+        /* external */
+        /* whenNotPaused */
     {
         // Safety check to prevent against an unexpected 0x0 default.
         require(_to != address(0));
@@ -190,7 +190,7 @@ contract KittyOwnership is KittyBase, ERC721 {
     ///  expensive (it walks the entire Kitty array looking for cats belonging to owner),
     ///  but it also returns a dynamic array, which is only supported for web3 calls, and
     ///  not contract-to-contract calls.
-    function tokensOfOwner(address _owner) external view returns(uint256[] ownerTokens) {
+    function tokensOfOwner(address _owner) /* external */ view returns(uint256[] ownerTokens) {
         uint256 tokenCount = balanceOf(_owner);
 
         if (tokenCount == 0) {

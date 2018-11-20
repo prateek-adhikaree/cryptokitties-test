@@ -19,8 +19,8 @@ contract TestKittyCore is KittyCore {
     function testMakeKittyPregnant() public {
         
         if (promoCreatedCount < pregnantKitties+2) {
-            testMakeKittyPregnant();
-            testMakeKittyPregnant();
+            testCreatePromoKitty();
+            testCreatePromoKitty();
         }
         
         uint256 _sireId = pregnantKitties+1;
@@ -49,6 +49,26 @@ contract TestKittyCore is KittyCore {
         
         // KittyBreeding.giveBirth(_matronId) is what actually creates a new Kitty 
         // But to do so, the geneScience is required which is not open source
+    }
+    
+    function testTransfer() public {
+        
+        if (super.tokensOfOwner(msg.sender).length == 0){
+            testCreatePromoKitty();
+        }
+        
+        address testAddress = 0x583031d1113ad414f02576bd6afabfb302140225;
+        uint256 token = super.tokensOfOwner(msg.sender)[0];
+        
+        uint256 _totalSupply = super.totalSupply();
+        uint256 _ownersTokens = super.balanceOf(msg.sender);
+        uint256 _newOwnerTokens = super.balanceOf(testAddress);
+        
+        transfer(testAddress, token);
+        
+        require (_totalSupply == super.totalSupply(), "Supply does not match");
+        require (_ownersTokens-1 == super.balanceOf(msg.sender), "Token NOT gone from owner's address");
+        require (_newOwnerTokens+1 == super.balanceOf(testAddress), "Token NOT added to new owner's address");
     }
     
     /*function testCreateGen0Kitty() public {

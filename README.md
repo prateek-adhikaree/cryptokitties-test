@@ -62,4 +62,4 @@ Curious to read more? Check out the full report here:
 
 ## Questions?
 
-Feel free to reach us at prateek.adhikaree@blocktest.net
+Feel free to reach me at prateek.adhikaree@blocktest.net
